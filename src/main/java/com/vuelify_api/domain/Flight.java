@@ -14,26 +14,32 @@ public class Flight extends Operation {
 
     @Column(nullable = false)
     protected String origin;
-
+    
     @Column(nullable = false)
     protected String destination;
-
-    private LocalDateTime departureTime;
-    private LocalDateTime arrivalTime;
+    
+    protected LocalDateTime departureTime;
+    protected LocalDateTime arrivalTime;
     protected BigDecimal price;
-    protected String status; // ON_TIME, CANCELLED, DELAYED (PENDING DOING IT ENUM)
+    protected String code;
+    protected String status = "SCHEDULED"; // SCHEDULED, ON_TIME, CANCELLED, DELAYED (PENDING DOING IT ENUM)
 
     @Column(nullable = false)
     private String flightNumber;
 
-    public Flight(String origin, String destination, LocalDateTime departureTime, BigDecimal price, String status,
-            String code, String flightNumber) {
+    public Flight(
+            String flightNumber,
+            String code,
+            String origin,
+            String destination,
+            BigDecimal price,
+            LocalDateTime departureTime
+    ) {
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
         this.price = price;
-        this.status = status;
-
+        this.code = code;
         this.flightNumber = flightNumber;
     }
 
@@ -77,6 +83,14 @@ public class Flight extends Operation {
         this.price = price;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -92,5 +106,7 @@ public class Flight extends Operation {
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
     }
+
+    
 
 }
