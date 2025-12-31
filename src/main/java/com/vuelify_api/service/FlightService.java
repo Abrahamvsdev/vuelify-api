@@ -1,7 +1,5 @@
 package com.vuelify_api.service;
 
-
-
 import org.jspecify.annotations.NullMarked;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +11,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@NullMarked
 public class FlightService {
 
     private final FlightRepository flightRepository;
 
-    @NullMarked
     public Flight createFlight(CreateFlightRequest request) {
         Flight newFlight = new Flight(
                 request.flightNumber(),
