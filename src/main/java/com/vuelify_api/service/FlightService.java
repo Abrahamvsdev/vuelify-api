@@ -1,5 +1,6 @@
 package com.vuelify_api.service;
 
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class FlightService {
 
     private final FlightRepository flightRepository;
 
-    public Flight createFlight(CreateFlightRequest request) {
+    public Flight createFlight(@NonNull CreateFlightRequest request) {
         Flight newFlight = new Flight(
                 request.flightNumber(),
                 request.code(),
