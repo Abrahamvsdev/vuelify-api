@@ -1,8 +1,12 @@
 package com.vuelify_api.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import java.net.URI;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.vuelify_api.domain.Flight;
 import com.vuelify_api.dto.CreateFlightRequest;
@@ -21,6 +25,8 @@ public class FlightController {
     @PostMapping
     public ResponseEntity<Flight> registerFlight(@RequestBody @Valid CreateFlightRequest request){
         
-        
-    }
+        Flight flightCreated = flightService.createFlight(request);
+
+        return ResponseEntity.created(URI.create("/api/flights/"+ flightCreated.getId())).body(flightCreated);
+    } 
 }
