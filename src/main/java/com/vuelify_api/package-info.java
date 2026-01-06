@@ -1,4 +1,4 @@
-@NonNull
+@NullMarked
 package com.vuelify_api;
 
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
