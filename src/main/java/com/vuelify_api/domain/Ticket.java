@@ -1,15 +1,11 @@
 package com.vuelify_api.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,19 +18,25 @@ import lombok.NoArgsConstructor;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-
-
-    
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
     private String seatNumber;
-    private BigDecimal basePrice; 
+    private BigDecimal basePrice;
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TicketAddon> addons = new ArrayList<>();
 
+    public BigDecimal getTotalPrice() {
+        BigDecimal total = basePrice;
+        for (TicketAddon addon : addons) {
+            total = total.add(addon.getPrice());
+        }
+        return total;
+    }
 
 }
