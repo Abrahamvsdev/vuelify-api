@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "crew")
+@Table(name = "crew_members")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
