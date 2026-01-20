@@ -3,6 +3,7 @@ package com.vuelify_api.controller;
 import java.net.URI;
 import java.util.UUID;
 
+import org.jspecify.annotations.NullMarked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,11 @@ import com.vuelify_api.service.FlightService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/flights")
 @RequiredArgsConstructor
+@NullMarked
 public class FlightController {
 
     private final FlightService flightService;
@@ -38,7 +39,7 @@ public class FlightController {
         return ResponseEntity.ok(flightFoundById);
     }
 
-    @GetMapping("/code/{code}")//TODO Path must change when "findAll" enters in the game
+    @GetMapping("/code/{code}") // TODO Path must change when "findAll" enters in the game
     public ResponseEntity<Flight> getFlightByCode(@PathVariable String code) {
         Flight flightFoundByCode = flightService.getFlightByCode(code);
         return ResponseEntity.ok(flightFoundByCode);

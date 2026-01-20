@@ -7,8 +7,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 
 @MappedSuperclass
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 public abstract class Operation {
 
     @Id
@@ -17,9 +26,6 @@ public abstract class Operation {
 
     protected LocalDateTime completeDateStart;
     protected LocalDateTime completeDateEnd;
-
-    public Operation() {
-    }
 
     public UUID getId() {
         return id;
@@ -44,7 +50,5 @@ public abstract class Operation {
     public void setCompleteDateEnd(LocalDateTime completeDateEnd) {
         this.completeDateEnd = completeDateEnd;
     }
-
-    
 
 }

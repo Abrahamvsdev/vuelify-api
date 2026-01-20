@@ -7,12 +7,18 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "flights")
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 
 
 public class Flight extends Operation {
@@ -31,22 +37,6 @@ public class Flight extends Operation {
 
     @Column(nullable = false)
     private String flightNumber;
-
-    public Flight(
-            String flightNumber,
-            String code,
-            String origin,
-            String destination,
-            BigDecimal price,
-            LocalDateTime departureTime
-    ) {
-        this.origin = origin;
-        this.destination = destination;
-        this.departureTime = departureTime;
-        this.price = price;
-        this.code = code;
-        this.flightNumber = flightNumber;
-    }
 
     public String getOrigin() {
         return origin;
